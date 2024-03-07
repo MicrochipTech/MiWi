@@ -17,15 +17,14 @@ reference information.
 
 - [Release Notes](./release_notes.md)
 - [MPLAB® Harmony License](mplab_harmony_license.md)
-- [MPLAB® Harmony 3 MiWi Wiki](https://github.com/Microchip-MPLAB-Harmony/wireless_15_4_mac/wiki)
-- [MPLAB® Harmony 3 MiWi API Help](docs/MPLAB_Harmony_Wireless_15_4_MAC_APIhelp.chm)
+- [MPLAB® Harmony 3 MiWi API Help](docs/index.md)
 
 # Contents Summary
 
 | Folder     | Description                                                       |
 | -----------| ------------------------------------------------------------------|
 | config     | MiWi module configuration file |
-| docs| [MiWi API documentation](https://onlinedocs.microchip.com/oxy/GUID-D769F037-FBC7-4D1C-9892-ADA91E643160-en-US-1/index.html)|
+| docs| [MiWi User Guide documentation](docs/index.md)|
 | drivers    | MiWi Protocol files and dependent files for pic32cxbz2 products     |
 
 

@@ -5,23 +5,23 @@
 
 ## Release v1.0.0
 
-MiWi Development Environment (MiWi DE) was developed by Microchip to support a wide range of
-wireless applications. The backbone of MiWi DE is MiMAC and MiApp interfaces, which links the support of multiple RF transceivers and wireless communication protocols together as a well-defined, simple but robust Microchip proprietary wireless development environment.
-Within MiWi DE, application developers can switch between RF transceivers and wireless protocols with little or no modification in the application layer. Such migration capability in MiWi DE reduces the firmware development risk to a very minimum level. MiWi DE is defined by three layers:
+MiWi is a Microchip proprietary protocol developed to support a wide range of wireless applications. 
+The backbone of MiWi is MiMAC and MiApp interfaces, which links the support of multiple RF transceivers and wireless communication protocols together as a well-defined, simple but robust Microchip proprietary wireless development environment.
+With MiWi, application developers can switch between RF transceivers and wireless protocols with little or no modification in the application layer. Such migration capability in MiWi DE reduces the firmware development risk to a very minimum level. MiWi DE is defined by three layers:
 • Application layer
 • Protocol layer
 • RF transceiver layer
-The three layers are linked together by MiMAC and MiApp interfaces. The Application layer uses MiApp interfaces to communicate to the protocol layer. In the protocol layer, there are implementations of MiWi Mesh(only Mesh is available in Harmony currently), MiWi P2P, MiWi Star(yet to be made available) wireless communication protocols. The drivers for Microchip RF
-transceivers (AT86RF233, AT86RF212B) are called by protocol layers via MiMAC interfaces.
+The three layers are linked together by MiMAC and MiApp interfaces. The Application layer uses MiApp interfaces to communicate to the protocol layer. In the protocol layer, there are implementations of MiWi Mesh, MiWi P2P, MiWi Star wireless communication protocols. 
+The drivers for WBZ451 and other Standalone Microchip RF transceivers (AT86RF233, AT86RF212B) are called by protocol layers via MiMAC interfaces.
 
 ## Known Issues / Limitations
 
 -	OTAU is not supported.
--   Application Data sending interval is recommended to be configured above 1secs, due to the limitation of Standalone PHY layer.
+-   MiWi depends on the Standalone PHY layer for lower functionality and any not supported feature/issues persist on that component will have an impact of the MiWi stack functionality.
 
 ## Development Tools
 -	MPLAB X v6.15
--	MPLAB® XC32 C/C++ Compiler v4.21
+-	MPLAB® XC32 C/C++ Compiler v4.35
 -	MPLAB® X IDE plug-ins: MPLAB® Code Configurator (MCC) v5.3.7 and above
 -	Device Pack: PIC32CX-BZ2-DFP (1.2.230)
 
