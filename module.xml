@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Module name="microchipwireless" id="9d16fb00-9073-4714-bc2a-d0ae115a057c" version="1.0.0">
+    <ConfigRoot path="config/module.py"/>
+</Module>

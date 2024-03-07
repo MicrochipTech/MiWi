@@ -1,0 +1,302 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="void USR_MLME_BeaconNotifyInd (uint8_t BSN, WPAN_Pandescriptor_t *PANDescriptor, uint8_t PendAddrSpec, uint8_t *AddrList, uint8_t sduLength, uint8_t *sdu); Callback function that must be implemented ..."/><meta name="copyright" content="(C) Copyright 2023"/><meta name="generator" content="DITA-OT"/><title>4.11.1 USR_MLME_BeaconNotifyInd callback Function</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\zps4h1vbsfe\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;usr-mlme-beaconnotifyind-callback-function&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;USR_MLME_BeaconNotifyInd callback Function&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:1;184:15&#34;/&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-4D13B9C0-5AF8-4E76-A795-BE3EC9D45898&#34; xtrc=&#34;topicref:39;6:6079&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-7B1D1DB1-CBE5-4A28-A30A-A5FA1328C701.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253.xml&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:38;6:5933&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-7B1D1DB1-CBE5-4A28-A30A-A5FA1328C701.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;Beacon Notification APIs&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;C&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;codeblock:1;184:15&#34;&gt;void USR_MLME_BeaconNotifyInd(uint8_t BSN, WPAN_Pandescriptor_t *PANDescriptor, uint8_t PendAddrSpec, uint8_t *AddrList, uint8_t sduLength, uint8_t *sdu);&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;summary&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;Summary&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:3;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;Callback function that must be implemented by application (NHLE) for MAC service MLME-BEACON-NOTIFY.indication.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;description&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:4;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:4;184:15&#34;&gt;Description&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:4;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;p:2;184:15&#34;&gt;This function implemented by application (NHLE) for MAC service MLME-BEACON-NOTIFY.indication.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;precondition&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:5;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:5;184:15&#34;&gt;Precondition&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:5;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;p:3;184:15&#34;&gt;WPAN_Init() should have been called before calling this function.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;parameters&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:6;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:6;184:15&#34;&gt;Parameters&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:6;184:15&#34;&gt;&lt;table class=&#34;- topic/table &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;table:1;184:15&#34;&gt;&lt;tgroup class=&#34;- topic/tgroup &#34; cols=&#34;2&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;tgroup:1;184:15&#34;&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col1&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;colspec:1;184:15&#34; colnum=&#34;1&#34;/&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col2&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;colspec:2;184:15&#34; colnum=&#34;2&#34;/&gt;&lt;thead class=&#34;- topic/thead &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;thead:1;184:15&#34;&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:1;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:1;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;1&#34;&gt;Param&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:2;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;1&#34;&gt;Description&lt;/entry&gt;&lt;/row&gt;&lt;/thead&gt;&lt;tbody class=&#34;- topic/tbody &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;tbody:1;184:15&#34;&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:2;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:3;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;2&#34;&gt;BSN&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:4;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;2&#34;&gt;Beacon sequence number&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:3;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:5;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;3&#34;&gt;PANDescriptor&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:6;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;3&#34;&gt;Pointer to PAN descriptor for received beacon&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:4;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:7;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;4&#34;&gt;PendAddrSpec&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:8;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;4&#34;&gt;Pending address specification in received beacon&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:5;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:9;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;5&#34;&gt;AddrList&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:10;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;5&#34;&gt;List of addresses of devices the coordinator has pending data&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:6;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:11;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;6&#34;&gt;sduLength&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:12;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;6&#34;&gt;Length of beacon payload&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;row:7;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:13;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;7&#34;&gt;sdu&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; align=&#34;left&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;entry:14;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;7&#34;&gt;Pointer to beacon payload&lt;/entry&gt;&lt;/row&gt;&lt;/tbody&gt;&lt;/tgroup&gt;&lt;/table&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;returns&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:7;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:7;184:15&#34;&gt;Returns&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:7;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;p:4;184:15&#34;&gt;None.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;example&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:8;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:8;184:15&#34;&gt;Example&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:8;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;codeblock:2;184:15&#34;&gt;void USR_MLME_BeaconNotifyInd(uint8_t BSN, WPAN_Pandescriptor_t *PANDescriptor, uint8_t PendAddrSpec, uint8_t *AddrList, uint8_t sduLength, uint8_t *sdu); { DeviceAddress = DeviceAddress; CapabilityInformation = CapabilityInformation; }&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;remarks&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;topic:9;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;title:9;184:15&#34;&gt;Remarks&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;body:9;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/zps4h1vbsfe/work/1/en-US/GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md&#34; xtrc=&#34;p:5;184:15&#34;&gt;There is weak function for this callback. User has to define own implementation for required operation on the reception of particular callback.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.md"/><meta name="wh-out-relpath" content="GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
+    
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+</head>
+
+    <body id="usr-mlme-beaconnotifyind-callback-function" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB Harmony Wireless 15.4 MAC API Reference Manual "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB Harmony Wireless 15.4 MAC API Reference Manual </a></div>
+                    
+                </div>
+                
+                
+            </div>
+
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
+        
+        
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"><div class="d-flex justify-content-end"><div class="dropdown"><a style="font-size: 1em; padding: 7px 12px !important;" class="btn py-3 px-3 btn-outline-light dropdown-toggle" href="#" role="button" id="devicesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product Pages</a><div style="font-size: 1em;" class="dropdown-menu" aria-labelledby="devicesMenu"><a class="dropdown-item" target="_blank" href="https://www.microchip.com/en-us/product/wbz451">WBZ451</a><a class="dropdown-item" target="_blank" href="https://www.microchip.com/en-us/product/wbz450"> WBZ450</a><a class="dropdown-item" target="_blank" href="https://www.microchip.com/en-us/product/pic32cx-bz2"> PIC32CX-BZ2</a></div></div></div></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
+</div>
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9"><div class="title"><a href="GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4</ph>
+MAC APIs</a></div></div></li><li><div class="topicref" data-id="GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253"><div class="title"><a href="GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.11</ph>
+Beacon Notification APIs</a></div></div></li><li class="active"><div class="topicref" data-id="usr-mlme-beaconnotifyind-callback-function"><div class="title"><a href="GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.11.1</ph>
+USR_MLME_BeaconNotifyInd callback Function</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem"><div data-tocid="GUID-B25BF6E4-E487-4DCF-8E11-3698A7A5DF21-d926e11" class="topicref" data-id="GUID-B25BF6E4-E487-4DCF-8E11-3698A7A5DF21" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B25BF6E4-E487-4DCF-8E11-3698A7A5DF21.html" id="GUID-B25BF6E4-E487-4DCF-8E11-3698A7A5DF21-d926e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+Introduction</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-56A791F2-A330-4D59-82FC-D9C6AFFBEC07-d926e19" class="topicref" data-id="GUID-56A791F2-A330-4D59-82FC-D9C6AFFBEC07" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-56A791F2-A330-4D59-82FC-D9C6AFFBEC07-d926e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-56A791F2-A330-4D59-82FC-D9C6AFFBEC07.html" id="GUID-56A791F2-A330-4D59-82FC-D9C6AFFBEC07-d926e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2</ph>
+MAC Architecture</a></div></div></li><li role="treeitem"><div data-tocid="GUID-591321BA-5871-454B-B049-976518046CCC-d926e83" class="topicref" data-id="GUID-591321BA-5871-454B-B049-976518046CCC" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-591321BA-5871-454B-B049-976518046CCC.html" id="GUID-591321BA-5871-454B-B049-976518046CCC-d926e83-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">3</ph>
+MAC Layer Features</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9-d926e91" class="topicref" data-id="GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9-d926e91-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9.html" id="GUID-1DE9D73F-973C-4E14-BA2E-3C2BF5B30BA9-d926e91-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4</ph>
+MAC APIs</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-EFC10569-E631-492C-967A-D52BE5CD43A7-d926e99" class="topicref" data-id="GUID-EFC10569-E631-492C-967A-D52BE5CD43A7" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-EFC10569-E631-492C-967A-D52BE5CD43A7-d926e99-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-EFC10569-E631-492C-967A-D52BE5CD43A7.html" id="GUID-EFC10569-E631-492C-967A-D52BE5CD43A7-d926e99-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.1</ph>
+System APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-2885E7AA-7EF0-44BC-A4EA-281259DCD251-d926e123" class="topicref" data-id="GUID-2885E7AA-7EF0-44BC-A4EA-281259DCD251" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-2885E7AA-7EF0-44BC-A4EA-281259DCD251-d926e123-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-2885E7AA-7EF0-44BC-A4EA-281259DCD251.html" id="GUID-2885E7AA-7EF0-44BC-A4EA-281259DCD251-d926e123-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.2</ph>
+Reset APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-60837011-98E8-4371-BD13-E71E384FBA2A-d926e147" class="topicref" data-id="GUID-60837011-98E8-4371-BD13-E71E384FBA2A" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-60837011-98E8-4371-BD13-E71E384FBA2A-d926e147-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-60837011-98E8-4371-BD13-E71E384FBA2A.html" id="GUID-60837011-98E8-4371-BD13-E71E384FBA2A-d926e147-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.3</ph>
+Set &amp; Get PIB Attributes APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-B33CFFD6-DB3D-4314-81F1-23D388AE9F67-d926e167" class="topicref" data-id="GUID-B33CFFD6-DB3D-4314-81F1-23D388AE9F67" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-B33CFFD6-DB3D-4314-81F1-23D388AE9F67-d926e167-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-B33CFFD6-DB3D-4314-81F1-23D388AE9F67.html" id="GUID-B33CFFD6-DB3D-4314-81F1-23D388AE9F67-d926e167-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.4</ph>
+Channel Scan APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-14E2302D-8D9E-4A99-86B4-89FAA3FB6C35-d926e191" class="topicref" data-id="GUID-14E2302D-8D9E-4A99-86B4-89FAA3FB6C35" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-14E2302D-8D9E-4A99-86B4-89FAA3FB6C35-d926e191-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-14E2302D-8D9E-4A99-86B4-89FAA3FB6C35.html" id="GUID-14E2302D-8D9E-4A99-86B4-89FAA3FB6C35-d926e191-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.5</ph>
+Start APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-8A8077CE-E940-4E10-8DA9-815C6406A784-d926e215" class="topicref" data-id="GUID-8A8077CE-E940-4E10-8DA9-815C6406A784" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-8A8077CE-E940-4E10-8DA9-815C6406A784-d926e215-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-8A8077CE-E940-4E10-8DA9-815C6406A784.html" id="GUID-8A8077CE-E940-4E10-8DA9-815C6406A784-d926e215-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.6</ph>
+Association APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-6FE28373-B7C9-4A15-B1B8-390B864120B2-d926e255" class="topicref" data-id="GUID-6FE28373-B7C9-4A15-B1B8-390B864120B2" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-6FE28373-B7C9-4A15-B1B8-390B864120B2-d926e255-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6FE28373-B7C9-4A15-B1B8-390B864120B2.html" id="GUID-6FE28373-B7C9-4A15-B1B8-390B864120B2-d926e255-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.7</ph>
+Disassociation APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-06A663DE-FB0B-4E6D-A4AE-37A8123DB08C-d926e287" class="topicref" data-id="GUID-06A663DE-FB0B-4E6D-A4AE-37A8123DB08C" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-06A663DE-FB0B-4E6D-A4AE-37A8123DB08C-d926e287-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-06A663DE-FB0B-4E6D-A4AE-37A8123DB08C.html" id="GUID-06A663DE-FB0B-4E6D-A4AE-37A8123DB08C-d926e287-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.8</ph>
+Poll APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-626BC179-2C84-45A5-9075-47D7BA9DB491-d926e311" class="topicref" data-id="GUID-626BC179-2C84-45A5-9075-47D7BA9DB491" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-626BC179-2C84-45A5-9075-47D7BA9DB491-d926e311-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-626BC179-2C84-45A5-9075-47D7BA9DB491.html" id="GUID-626BC179-2C84-45A5-9075-47D7BA9DB491-d926e311-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.9</ph>
+Data Service APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-1F251613-C300-488B-AECA-DBE46E6E21F2-d926e343" class="topicref" data-id="GUID-1F251613-C300-488B-AECA-DBE46E6E21F2" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-1F251613-C300-488B-AECA-DBE46E6E21F2-d926e343-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-1F251613-C300-488B-AECA-DBE46E6E21F2.html" id="GUID-1F251613-C300-488B-AECA-DBE46E6E21F2-d926e343-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.10</ph>
+Purge APIs</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253-d926e368" class="topicref" data-id="GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253-d926e368-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253.html" id="GUID-5B2DF770-3054-4D19-B9EC-7943F6EC1253-d926e368-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.11</ph>
+Beacon Notification APIs</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" class="active"><div data-tocid="usr-mlme-beaconnotifyind-callback-function-d926e376" class="topicref" data-id="usr-mlme-beaconnotifyind-callback-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-9D37CED5-A262-492D-A49A-F4C81FE8643C.html" id="usr-mlme-beaconnotifyind-callback-function-d926e376-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.11.1</ph>
+USR_MLME_BeaconNotifyInd callback Function</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-19870B21-B264-4D75-9015-8AFE421C5173-d926e384" class="topicref" data-id="GUID-19870B21-B264-4D75-9015-8AFE421C5173" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-19870B21-B264-4D75-9015-8AFE421C5173-d926e384-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-19870B21-B264-4D75-9015-8AFE421C5173.html" id="GUID-19870B21-B264-4D75-9015-8AFE421C5173-d926e384-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.12</ph>
+Orphan Notification APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-1F9CC9B0-7DC1-4B70-B925-58E315ECDE0D-d926e408" class="topicref" data-id="GUID-1F9CC9B0-7DC1-4B70-B925-58E315ECDE0D" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-1F9CC9B0-7DC1-4B70-B925-58E315ECDE0D-d926e408-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-1F9CC9B0-7DC1-4B70-B925-58E315ECDE0D.html" id="GUID-1F9CC9B0-7DC1-4B70-B925-58E315ECDE0D-d926e408-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.13</ph>
+Communication Status APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-881C03A5-AD3D-4A69-AAAD-659F664E313D-d926e424" class="topicref" data-id="GUID-881C03A5-AD3D-4A69-AAAD-659F664E313D" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-881C03A5-AD3D-4A69-AAAD-659F664E313D-d926e424-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-881C03A5-AD3D-4A69-AAAD-659F664E313D.html" id="GUID-881C03A5-AD3D-4A69-AAAD-659F664E313D-d926e424-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.14</ph>
+Rx Enable APIs</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-3A8B83A3-ACFD-4B67-A34D-852B5485CC37-d926e448" class="topicref" data-id="GUID-3A8B83A3-ACFD-4B67-A34D-852B5485CC37" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-3A8B83A3-ACFD-4B67-A34D-852B5485CC37-d926e448-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-3A8B83A3-ACFD-4B67-A34D-852B5485CC37.html" id="GUID-3A8B83A3-ACFD-4B67-A34D-852B5485CC37-d926e448-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4.15</ph>
+Sleep APIs</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-79CBF970-88D2-439D-B43A-84895A94254D-d926e472" class="topicref" data-id="GUID-79CBF970-88D2-439D-B43A-84895A94254D" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-79CBF970-88D2-439D-B43A-84895A94254D-d926e472-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-79CBF970-88D2-439D-B43A-84895A94254D.html" id="GUID-79CBF970-88D2-439D-B43A-84895A94254D-d926e472-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">5</ph>
+MAC PIBs and Data Structures</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0E9F7202-4517-4ECB-8255-651BFD5B1B75-d926e795" class="topicref" data-id="GUID-0E9F7202-4517-4ECB-8255-651BFD5B1B75" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0E9F7202-4517-4ECB-8255-651BFD5B1B75-d926e795-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0E9F7202-4517-4ECB-8255-651BFD5B1B75.html" id="GUID-0E9F7202-4517-4ECB-8255-651BFD5B1B75-d926e795-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">6</ph>
+Message Sequence for various MAC functionalities</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d926e843" class="topicref backmatter backmatter_parent" data-id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d926e843-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B.html" id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d926e843-link">Microchip Information</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">4.11.1 USR_MLME_BeaconNotifyInd callback Function</h1><div class="- topic/body body"></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> C</h2><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock c"><strong class="hl-keyword">void</strong> <span class="hl-functions">USR_MLME_BeaconNotifyInd</span>(uint8_t BSN, WPAN_Pandescriptor_t *PANDescriptor, uint8_t PendAddrSpec, uint8_t *AddrList, uint8_t sduLength, uint8_t *sdu);</pre></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="- topic/title title topictitle2" id="ariaid-title3" style=""> Summary</h2><div class="- topic/body body"><p class="- topic/p p">Callback function that must be implemented by application (NHLE) for MAC service MLME-BEACON-NOTIFY.indication.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="- topic/title title topictitle2" id="ariaid-title4" style=""> Description</h2><div class="- topic/body body"><p class="- topic/p p">This function implemented by application (NHLE) for MAC service MLME-BEACON-NOTIFY.indication.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title5" id="precondition"><h2 class="- topic/title title topictitle2" id="ariaid-title5" style=""> Precondition</h2><div class="- topic/body body"><p class="- topic/p p">WPAN_Init() should have been called before calling this function.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title6" id="parameters"><h2 class="- topic/title title topictitle2" id="ariaid-title6" style=""> Parameters</h2><div class="- topic/body body"><div class="table-container"><table class="- topic/table table" data-cols="2"><caption></caption><colgroup><col/><col/></colgroup><thead class="- topic/thead thead"><tr class="- topic/row"><th class="- topic/entry entry align-left colsep-0 rowsep-0" id="parameters__entry__1">Param</th><th class="- topic/entry entry align-left colsep-0 rowsep-0" id="parameters__entry__2">Description</th></tr></thead><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__1">BSN</td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__2">Beacon sequence number</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__1">PANDescriptor</td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__2">Pointer to PAN descriptor for received beacon</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__1">PendAddrSpec</td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__2">Pending address specification in received beacon</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__1">AddrList</td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__2">List of addresses of devices the coordinator has pending data</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__1">sduLength</td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__2">Length of beacon payload</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__1">sdu</td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="parameters__entry__2">Pointer to beacon payload</td></tr></tbody></table></div></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title7" id="returns"><h2 class="- topic/title title topictitle2" id="ariaid-title7" style=""> Returns</h2><div class="- topic/body body"><p class="- topic/p p">None.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title8" id="example"><h2 class="- topic/title title topictitle2" id="ariaid-title8" style=""> Example</h2><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock c"><strong class="hl-keyword">void</strong> <span class="hl-functions">USR_MLME_BeaconNotifyInd</span>(uint8_t BSN, WPAN_Pandescriptor_t *PANDescriptor, uint8_t PendAddrSpec, uint8_t *AddrList, uint8_t sduLength, uint8_t *sdu);
+
+{
+     DeviceAddress = DeviceAddress;
+     CapabilityInformation = CapabilityInformation;
+}</pre></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title9" id="remarks"><h2 class="- topic/title title topictitle2" id="ariaid-title9" style=""> Remarks</h2><div class="- topic/body body"><p class="- topic/p p">There is weak function for this callback. User has to define own implementation for  required operation on the reception of particular callback.</p></div></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#c" data-tocid="c"> C</a></li><li class="topic-item"><a href="#summary" data-tocid="summary"> Summary</a></li><li class="topic-item"><a href="#description" data-tocid="description"> Description</a></li><li class="topic-item"><a href="#precondition" data-tocid="precondition"> Precondition</a></li><li class="topic-item"><a href="#parameters" data-tocid="parameters"> Parameters</a></li><li class="topic-item"><a href="#returns" data-tocid="returns"> Returns</a></li><li class="topic-item"><a href="#example" data-tocid="example"> Example</a></li><li class="topic-item"><a href="#remarks" data-tocid="remarks"> Remarks</a></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <div class="mchp_disclaimer"><p class="mchp_disclaimer_text">The online versions of the documents are provided as a courtesy. Verify all content and data in the device’s PDF documentation found on the device product page.</p></div><footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+</div>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+    </body>
+</html>
