@@ -1,19 +1,18 @@
 /*******************************************************************************
-  SAL Header
-  
+  MiWi Init Header File
+
+  Company:
+    Microchip Technology Inc.
+
   File Name:
-    sal_types.h
+    miwi_init.h
 
   Summary:
-    This file defines for SAL types
+    This file contains the System Sleep functions for the project.
 
   Description:
-   The IEEE standard 802.15.4 MAC Layer defines the protocol and compatible
-   interconnection for data communication devices using low data rate, low 
-   power and low complexity, short-range radio frequency (RF) transmissions in a
-   wireless personal area network (WPAN).
-
-*******************************************************************************/
+    This file contains the System Sleep functions for the project.
+ *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
@@ -40,58 +39,55 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef SAL_TYPES_H
-#define SAL_TYPES_H
+#ifndef MIWI_INIT_H
+#define MIWI_INIT_H
 
-/* === INCLUDES ============================================================ */
-
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-    extern "C" {
-
-#endif
-// DOM-IGNORE-END
+#include <stdbool.h>
+#include <stdint.h>
+#include "config/default/definitions.h"
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Macros
 // *****************************************************************************
 // *****************************************************************************
+#define QUEUE_LENGTH (8)
+#define QUEUE_ITEM_SIZE (sizeof(void *))
 
 // *****************************************************************************
-/* 
-
-   Summary:
-    This macro holds Dummy SAL type
-   Description:
-	None
-   Remarks:
-    None 
- */
-
-#define NO_SAL                          (0x00)
-
 // *****************************************************************************
-/* 
+// Section: Data Types
+// *****************************************************************************
+typedef enum
+{
+  MIWI_NONE,
+} eMODULE_ID;
 
-   Summary:
-    This macro holds PIC32CX_BZ2 SAL type
-   Description:
-	None
-   Remarks:
-    None 
- */
+typedef struct
+{    
+   uint8_t uApiID;       // API/Function ID in the respctive module
+   uint8_t paramSize;
+   void *parameters;      // Function Parameters 
+}__attribute__((packed, aligned(1)))STACK_API_Request;
 
-#define PIC32CX_BZ2                     (0x01)
-
-/* === PROTOTYPES ========================================================== */
-
-//DOM-IGNORE-BEGIN
-#ifdef __cplusplus
-}
+extern OSAL_QUEUE_HANDLE_TYPE miwiRequestQueueHandle;
+extern defaultParametersRomOrRam_t *miwiDefaultRomOrRamParams;
+extern defaultParametersRamOnly_t *miwiDefaultRamOnlyParams;
+extern bool appInitialized;
+extern OSAL_API_LIST_TYPE *mimac;
+extern uint8_t dummyVal;
+// *****************************************************************************
+// *****************************************************************************
+// Section: Function Prototypes
+// *****************************************************************************
+// *****************************************************************************
+void MiWi_Init(OSAL_API_LIST_TYPE *osalAPIList,OSAL_QUEUE_HANDLE_TYPE *miwiRequestQueueHandle);
+void MiWi_ApplicationInit(void);
+void MiMAC_Tasks(void);
+void MiMac_PostTask(bool isISRContext);
+void MIWI_API_CALL(STACK_API_Request *request);
+#ifdef USER_BUTTON_ENABLED
+void eic_custom_cb(uintptr_t context);
+void eicCbTimerHandler(uintptr_t context);
 #endif
-//DOM-IGNORE-END
-
-#endif /* SAL_TYPES_H */
-/* EOF */
+#endif//MIWI_INIT_H

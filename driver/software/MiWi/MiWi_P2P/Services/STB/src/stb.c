@@ -36,8 +36,8 @@
 /* === Includes ============================================================ */
 
 #include <string.h>
-#include "MiWi/MiWi_Mesh/Services/STB/inc/stb.h"
-#include "MiWi/MiWi_Mesh/Services/SAL/inc/sal.h"
+#include "MiWi/MiWi_P2P/Services/STB/inc/stb.h"
+#include "MiWi/MiWi_P2P/Services/SAL/inc/sal.h"
 #include "ieee_phy_const.h"
 
 /* === Macros ============================================================== */

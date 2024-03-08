@@ -38,7 +38,7 @@
 /* === Includes ============================================================ */
 
 #include <string.h>
-#include "MiWi/MiWi_Mesh/Services/SAL/inc/sal.h"
+#include "MiWi/MiWi_P2P/Services/SAL/inc/sal.h"
 #include "config/default/definitions.h"
 #include "wolfssl/wolfcrypt/port/pic32/crypt_wolfcryptcb.h"
 #include "configuration.h"
