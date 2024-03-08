@@ -12,7 +12,7 @@
     -   [Building Applications in MPLAB X IDE](GUID-29BF6402-BC04-4AFD-B57E-5352068B5670.md)
 -   [Hardware Environment Setup](GUID-0E01ADCD-AF56-4D4A-97C5-3BEECF3D7193.md)
     -   [Supported Platforms and Boards](GUID-66C18385-5623-44F3-87C6-2C5B8443D8C9.md)
--   [MiWi Mesh Demo Reference Application](GUID-32628D58-8B41-490F-8DA4-520C34856980.md)
+-   [MiWi Demo Reference Application](GUID-32628D58-8B41-490F-8DA4-520C34856980.md)
     -   [Creating a Demo in MPLAB X IDE and MCC](GUID-DD8C9CA7-0098-46DB-90E4-076167455B0E.md)
     -   [MCC Configurations for MiWi Topologies](GUID-7C1892D2-1B15-442D-B7C8-6BE3C5CB1B72.md)
         -   [MiWi Mesh Configurations](GUID-AF9C2C4F-CC80-4C43-9500-698551D8A279.md)

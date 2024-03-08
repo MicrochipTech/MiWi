@@ -1449,7 +1449,10 @@ void PHY_TxDoneCallback(PHY_Retval_t status, PHY_FrameInfo_t *frame)
     {
 	  dataConfCallback(dataHandle, dataStatus, frame->mpdu);
     }
-    bmm_buffer_free(frame->buffer_header);
+	if(frame->buffer_header != NULL)
+    {
+        bmm_buffer_free(frame->buffer_header);
+	}
 }
 
 void PHY_RxFrameCallback(PHY_FrameInfo_t *rxFrame)
