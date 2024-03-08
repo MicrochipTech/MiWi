@@ -403,7 +403,7 @@ bool PHY_SubscribeReservedFrameIndicationCallback(PHY_ReservedFrameIndCallback_t
      *      None
      *
      *****************************************************************************************/
-    #ifndef (PHY_AT86RF212B)
+    #ifndef PHY_AT86RF212B
     bool MiMAC_SetPower(int8_t outputPower);
     #endif
 

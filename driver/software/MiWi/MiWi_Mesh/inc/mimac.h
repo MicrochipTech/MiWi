@@ -348,7 +348,7 @@
      *      None
      *
      *****************************************************************************************/
-    #ifndef (PHY_AT86RF212B)
+    #ifndef PHY_AT86RF212B
     bool MiMAC_SetPower(int8_t outputPower);
     #endif
 

@@ -77,6 +77,7 @@ MAC_RECEIVED_PACKET  MACRxPacket;
 uint8_t calculated_mic_values[AES_BLOCKSIZE/4];
 uint8_t received_mic_values[AES_BLOCKSIZE/4];
 #endif
+extern bool txCallbackReceived;
 /************************************************************************************
  * Function:
  *      bool MiMAC_SetAltAddress(uint8_t *Address, uint8_t *PANID)
@@ -1484,7 +1485,7 @@ void PHY_RxFrameCallback(PHY_FrameInfo_t *rxFrame)
     MiMac_PostTask(false);
 
 }
-#ifndef (PHY_AT86RF212B)
+#ifndef PHY_AT86RF212B
 bool MiMAC_SetPower(int8_t outputPower)
 {
     if (PHY_SUCCESS == PHY_ConfigTxPwr(false, outputPower))
