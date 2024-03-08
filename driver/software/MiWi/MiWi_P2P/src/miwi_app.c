@@ -46,7 +46,6 @@
 #if defined(ENABLE_SLEEP_FEATURE)
 #include "config/default/device_deep_sleep.h"
 #endif
-#include "phy.h"
 /************************** VARIABLES ************************************/
 #define LIGHT   0x01
 #define SWITCH  0x02
