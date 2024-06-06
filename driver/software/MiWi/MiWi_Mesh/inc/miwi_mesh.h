@@ -111,11 +111,11 @@ extern queue_t nonAckFrameQueue;
 #ifndef ENDDEVICE
 extern queue_t indirectFrameQueue;
 #endif
-#if defined(ENABLE_NETWORK_FREEZER)
+//#if defined(ENABLE_NETWORK_FREEZER)
 #ifdef ENDDEVICE
-extern void connectionConfirm(miwi_status_t status);
+void connectionConfirm(miwi_status_t status);
 #endif
-#endif
+//#endif
 extern API_UINT16_UNION myPANID;
 extern uint8_t currentChannel;
 extern miwi_status_t initStatus;

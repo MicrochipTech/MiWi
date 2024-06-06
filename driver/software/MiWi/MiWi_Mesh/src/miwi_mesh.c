@@ -58,11 +58,11 @@ static bool sendData(uint8_t dataType, uint8_t addr_len, uint8_t *addr, uint8_t 
 queue_t frameTxQueue;
 queue_t frameRxQueue;
 API_UINT16_UNION myPANID;
-#if defined(ENABLE_NETWORK_FREEZER)
-#ifdef ENDDEVICE
-void connectionConfirm(miwi_status_t status);
-#endif
-#endif
+// #if defined(ENABLE_NETWORK_FREEZER)
+// #ifdef ENDDEVICE
+// void connectionConfirm(miwi_status_t status);
+// #endif
+// #endif
 
 /************************ Static Declarations **********************************/
 /* current operating channel for the device */
@@ -230,16 +230,17 @@ miwi_status_t MiApp_ProtocolInit(void)
     return initStatus;
 }
 
-#if defined(ENABLE_NETWORK_FREEZER)
+// #if defined(ENABLE_NETWORK_FREEZER)
 #ifdef ENDDEVICE
 void connectionConfirm(miwi_status_t status)
 {
+#if defined(ENABLE_NETWORK_FREEZER)
     /* Indicate application with status of reconnection */
     if (NULL != reconnectionCallback)
     {
         reconnectionCallback(status);
     }
-
+#endif
 #if defined(ENABLE_FREQUENCY_AGILITY)
     if (newChannelToUpdate != 0xFFU)
     {
@@ -259,7 +260,7 @@ void connectionConfirm(miwi_status_t status)
 #endif
 }
 #endif
-#endif
+// #endif
 
 /*********************************************************************
  * BOOL    isSameAddress(uint8_t *Address1, uint8_t *Address2)

@@ -98,32 +98,42 @@ static void appDataInd(RECEIVED_MESH_MESSAGE *ind);
 *****************************************************************************/
 static void appDataInd(RECEIVED_MESH_MESSAGE *ind)
 {
-	AppMessage_t *msg = (AppMessage_t *)ind->payload;
-
+    AppMessage_t *msg = (AppMessage_t *)ind->payload;
+ 
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
 #if defined(CHIMERA_SOC)
     RGB_LED_GREEN_Toggle();
 #else
-	LED_Toggle(1,LED_DATA);
+    LED_Toggle(1,LED_DATA);
 #endif
 #endif
 #endif
 #endif
-
-	msg->lqi = ind->packetLQI;
-	msg->rssi = (int8_t)ind->packetRSSI;
+ 
+    msg->lqi = ind->packetLQI;
+    msg->rssi = (int8_t)ind->packetRSSI;
+    SYS_CONSOLE_PRINT("\r\nPayload received\r\n");
 #if defined(PAN_COORDINATOR)
-//	appUartSendMessage(ind->payload, ind->payloadSize);
+    for(uint8_t i=0U; i<ind->payloadSize; i++)
+    {
+        SYS_CONSOLE_PRINT("%x",ind->payload[i]);
+    }
+        SYS_CONSOLE_PRINT("\n");
 #else
-    appCmdDataInd(ind);
+//    appCmdDataInd(ind);
+    for(uint8_t i=0U; i<ind->payloadSize; i++)
+    {
+        SYS_CONSOLE_PRINT("%x",ind->payload[i]);
+    }
+    SYS_CONSOLE_PRINT("\n");
 #endif
 #if defined(ENABLE_SLEEP_FEATURE) && defined(ENDDEVICE)
 #if (CAPABILITY_INFO == CAPABILITY_INFO_ED)
     deviceCanSleep = true;
     APP_Msg_T sleepReq;
-    sleepReq.msgId = (uint8_t)APP_STATE_DATA_RECEIVE_IND;   
+    sleepReq.msgId = (uint8_t)APP_STATE_DATA_RECEIVE_IND;  
     appStates = APP_STATE_DATA_RECEIVE_IND;
     OSAL_QUEUE_Send(&appData.appQueue, &sleepReq, 0);
 #endif
@@ -945,7 +955,7 @@ void searchConfim(uint8_t foundScanResults, void* ScanResults)
 					selectedParentIndex = 0U;
 				}
 #if (CAPABILITY_INFO == CAPABILITY_INFO_ED)
-				else if (searchConfRes->beaconList[loopindex].sleepEnddeviceCapacity > searchConfRes->beaconList[selectedParentIndex].sleepEnddeviceCapacity)
+				else if (searchConfRes->beaconList[loopindex].sleepEnddeviceCapacity > searchConfRes->beaconList[selectedParentIndex].sleepEnddeviceCapacity){}
 #elif (CAPABILITY_INFO == CAPABILITY_INFO_ED_RXON)
 				else if (searchConfRes->beaconList[loopindex].enddeviceCapacity > searchConfRes->beaconList[selectedParentIndex].enddeviceCapacity)
                 {
