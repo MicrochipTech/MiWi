@@ -20,10 +20,10 @@ The drivers for WBZ451 and other Standalone Microchip RF transceivers (AT86RF233
 -   MiWi depends on the Standalone PHY layer for lower functionality and any not supported feature/issues persist on that component will have an impact of the MiWi stack functionality.
 
 ## Development Tools
--	MPLAB X v6.15
--	MPLAB® XC32 C/C++ Compiler v4.35
--	MPLAB® X IDE plug-ins: MPLAB® Code Configurator (MCC) v5.3.7 and above
--	Device Pack: PIC32CX-BZ2-DFP (1.2.230)
+-	MPLAB X v6.20
+-	MPLAB® XC32 C/C++ Compiler v4.40
+-	MPLAB® X IDE plug-ins: MPLAB® Code Configurator (MCC) v5.5.0 and above
+-	Device Pack: PIC32CX-BZ2-DFP (1.4.243)
 
 ## Notes
 -	None
