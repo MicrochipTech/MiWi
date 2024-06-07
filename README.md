@@ -12,7 +12,7 @@ MPLAB® Harmony 3 is an extension of the MPLAB® ecosystem for creating embedded
 - [Microchip MPLAB® Harmony Pages](https://microchip-mplab-harmony.github.io/)
 
 This repository contains the MPLAB® Harmony 3 MiWi for PIC32CX-BZ2 platform devices. 
-The MiWi protocol stack supports MiWi's own proprietary application(MiApp) & mac layer(MiMAC) and IEEE 802.15.4 Standalone PHY Layer of devices like WBZ451, RF233 and RF212B. 
+The MiWi protocol stack supports MiWi's own proprietary application(MiApp) & mac layer(MiMAC) and IEEE 802.15.4 Standalone PHY Layer of devices like WBZ451, RF233, RF212B & RF215. 
 Refer to the following links for release notes, training materials, and interface reference information.
 
 As a first step, the [MiWi](https://github.com/MicrochipTech/MiWi) repo must be cloned to the User's Local Harmony repo folder location and follow the steps mentioned in the follwoing [link](https://github.com/MicrochipTech/MiWi/blob/main/docs/GUID-32628D58-8B41-490F-8DA4-520C34856980.md) to generate the harmony project application.

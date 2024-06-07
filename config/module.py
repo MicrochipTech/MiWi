@@ -33,6 +33,7 @@ def loadModule():
                           'ATSAMR21G18A',
                           'ATSAMD20J18A',
                           'ATSAMD21J18A',
+                          'ATSAMR30G18A',
                           'WBZ351',
                           } 
                           

@@ -103,7 +103,7 @@ static void MiWi_WakeUpFromDeepSleep(void);
 uint8_t myChannel = 25U;
 /* Range: 11 to 26 */
 #elif defined(PHY_AT86RF212B)
-uint8_t myChannel = CHANNEL_MAP;
+uint8_t myChannel = 8;
 #elif defined(PHY_AT86RF233)
 uint8_t myChannel = 26U;
 /* Range for default configuration: 1 to 10

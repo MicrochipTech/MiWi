@@ -3,7 +3,7 @@
 
 # Microchip Wireless (MiWi) Release Notes
 
-## Release v1.0.0
+## Release v1.1.0
 
 MiWi is a Microchip proprietary protocol developed to support a wide range of wireless applications. 
 The backbone of MiWi is MiMAC and MiApp interfaces, which links the support of multiple RF transceivers and wireless communication protocols together as a well-defined, simple but robust Microchip proprietary wireless development environment.
@@ -12,7 +12,7 @@ With MiWi, application developers can switch between RF transceivers and wireles
 • Protocol layer
 • RF transceiver layer
 The three layers are linked together by MiMAC and MiApp interfaces. The Application layer uses MiApp interfaces to communicate to the protocol layer. In the protocol layer, there are implementations of MiWi Mesh, MiWi P2P, MiWi Star wireless communication protocols. 
-The drivers for WBZ451 and other Standalone Microchip RF transceivers (AT86RF233, AT86RF212B) are called by protocol layers via MiMAC interfaces.
+The drivers for WBZ451 and other Standalone Microchip RF transceivers (AT86RF233, AT86RF212B, AT86RF215) are called by protocol layers via MiMAC interfaces.
 
 ## Known Issues / Limitations
 
