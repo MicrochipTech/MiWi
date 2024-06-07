@@ -45,7 +45,7 @@
 	#define LAST_CHANNEL_NUM       26
 	#define MAX_FRAME_TX_TIME      5
 #elif (defined(PHY_AT86RF212B))
-	#define FULL_CHANNEL_MAP       0x07FFF800
+	#define FULL_CHANNEL_MAP       0x000007FF
     #define FULL_CHANNEL_MAP_CHINA   (0x0000000F)
 	#define FIRST_CHANNEL_NUM      0
 	#define LAST_CHANNEL_NUM       10

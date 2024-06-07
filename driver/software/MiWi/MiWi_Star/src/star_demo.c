@@ -277,7 +277,7 @@ void run_star_demo(void)
             break;
         }
 #endif
-            uint8_t PressedButton = ButtonPressed();
+            uint8_t PressedButton = 1; //ButtonPressed();
             if ( PressedButton == 1 || PressedButton == 2)
             {
 
@@ -335,7 +335,7 @@ void run_star_demo(void)
                         {
                                 bool mac_ack_status;
                                 /* Check for Button Press */
-                                uint8_t switch_val = ButtonPressed();
+                                uint8_t switch_val = 1; //ButtonPressed();
 
                                 /* While waiting in TX , RX will process if any message was available */
 //                                P2PTasks ();
