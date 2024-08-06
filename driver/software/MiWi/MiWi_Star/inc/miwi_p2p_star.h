@@ -234,4 +234,7 @@ extern uint8_t optimalChannel;
 #endif
 bool    isSameAddress(uint8_t *Address1, uint8_t *Address2);
 
+void addAcceptedDeviceAddr(uint64_t *acceptedAddr);
+uint64_t convert_to_64bit(uint8_t* memory_location);
+bool checkDevAddr(uint8_t* addressToCheck);
 #endif //__MIWI_P2P_STAR_H_

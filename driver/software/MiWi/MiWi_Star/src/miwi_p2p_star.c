@@ -113,6 +113,12 @@ typedef struct _TxFrame_t
         buffer_t* pMemClr;
 } __attribute__((packed, aligned(1)))TxFrame_t;
 
+
+typedef struct
+{
+    uint64_t deviceAddress;
+} AcceptedDeviceTable_t;
+
 /********************* Global and Static Variables *************************************/
 static DataConf_callback_t sentFrameCb;
 uint8_t busyLock = 0U;
@@ -240,6 +246,13 @@ PacketIndCallback_t pktRxcallback = NULL;
 #if defined(ENABLE_SECURITY)
 API_UINT32_UNION IncomingFrameCounter[CONNECTION_SIZE];  // If authentication is used, IncomingFrameCounter can prevent replay attack
 #endif
+
+#if defined (ADDRESS_CHECK)
+bool filterDeviceAddress = true;
+#else
+bool filterDeviceAddress = false;
+#endif
+AcceptedDeviceTable_t acceptedDevTable[CONNECTION_SIZE];
 /************************************** Function Prototypes****************************************************/
 bool frameTransmit(bool Broadcast,API_UINT16_UNION DestinationPANID, uint8_t *DestinationAddress, bool isCommand, bool SecurityEnabled,
                     uint8_t msgLen,  uint8_t* msgPtr,  uint8_t msghandle,  bool ackReq,  DataConf_callback_t ConfCallback, buffer_t* memClrPtr);
@@ -296,6 +309,46 @@ static void channelHopCmdCallback(uint8_t msgConfHandle, miwi_status_t status, u
 //extern uint8_t ConnMode;
 //extern uint8_t LatestConnection;
 //extern CONNECTION_ENTRY connectionTable[CONNECTION_SIZE];
+void addAcceptedDeviceAddr(uint64_t *acceptedAddr)
+{
+    if (filterDeviceAddress)
+    {
+        for (uint8_t i = 0; i<CONNECTION_SIZE; i++)
+        {
+            //if (acceptedAddr[i]!=0)
+            acceptedDevTable[i].deviceAddress = acceptedAddr[i];
+        }
+    }   
+}
+
+uint64_t convert_to_64bit(uint8_t* memory_location) 
+{
+    uint64_t result = 0;
+    for (uint8_t i = 0; i < 8; i++) 
+    {
+        result |= ((uint64_t)memory_location[7-i]) << (8 * (7 - i));
+    }
+    return result;
+}
+
+bool checkDevAddr(uint8_t* addressToCheck)
+{
+    if (filterDeviceAddress)
+    {
+    uint64_t addr = convert_to_64bit(addressToCheck);
+    for (uint8_t i=0; i<CONNECTION_SIZE; i++)
+    {
+        if (addr == acceptedDevTable[i].deviceAddress)
+        {
+            return true;
+        }
+    }
+    return false;
+    }
+    return true;
+}
+
+
 /********************* Function Definitions *******************************************/
 miwi_status_t MiApp_ProtocolInit(defaultParametersRomOrRam_t *defaultRomOrRamParams,
                                        defaultParametersRamOnly_t *defaultRamOnlyParams)
@@ -2138,6 +2191,11 @@ void frameParse(MAC_RECEIVED_PACKET *macRxPacket)
                 else
 #endif
                 {
+                bool addrPresent = checkDevAddr(MACRxPacket.SourceAddress);
+                if (!addrPresent)
+                {
+                    return;
+                }
                     /* Request accepted, try to add the requesting device into P2P Connection Entry */
                     status = AddConnection(rxMessage.Payload[2]);
                 }

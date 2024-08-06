@@ -111,6 +111,8 @@ uint8_t myChannel = 26U;
  recommendation from Data Sheet for European band (ie.,Channel 0)*/
 #endif
 
+
+uint64_t devicesToBeAccepted[CONNECTION_SIZE] = {0x33665544332211AB,0x22665544332211AB,0x44665544332211AB,0,0};
 /*********************************************************************
 * Function: bool freezer_feature(void)
 *
@@ -298,6 +300,8 @@ bool Initialize_Demo(bool freezer_enable)
     DemoOutput_Channel(myChannel, 0U);
 
     startNetwork =  false;
+    
+    addAcceptedDeviceAddr(devicesToBeAccepted);
 
     /* Try to establish a new connection with peer device by broadcast Connection Request */
     return MiApp_EstablishConnection(myChannel, 2U, (uint8_t*)&broadcastAddr, 0U, Connection_Confirm);

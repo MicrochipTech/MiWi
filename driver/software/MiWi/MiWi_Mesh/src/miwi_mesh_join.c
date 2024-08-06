@@ -69,7 +69,7 @@ uint16_t myParentShortAddress = 0xFFFFU;
 static bool connectionPermit = false;
 static uint8_t endDeviceCapacityPercent = 0U;
 static uint8_t SleepEndDeviceCapacityPercent = 0U;
-uint8_t bloomFilterValue[BLOOM_FILTER_SIZE];
+//uint8_t bloomFilterValue[BLOOM_FILTER_SIZE];
 uint8_t backupChannel = 0U;
 #ifndef PAN_COORDINATOR
 uint8_t edLinkFailureAttempts;
@@ -474,11 +474,6 @@ bool MiApp_StartConnection(uint8_t Mode, uint8_t ScanDuration, uint32_t ChannelM
     /* Store scan duration */
     gChannelMap = ChannelMap;
 
-    /* bloom filter feature*/
-	if (!bloomFilterAutoJoin)
-	{
-        MiApp_Commissioning_AddNewDevice(0x11665544332211AB, true); //0x11665544332211AB is ieee address which can be modified for bloom filter enable
-    }
     
     switch(Mode)
     {

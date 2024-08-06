@@ -54,7 +54,11 @@ static uint8_t initiateNetworkBloomUpdate(void);
 #if defined(PAN_COORDINATOR)
 static uint8_t NumOfCommnDevices = 0;
 #endif
+#ifndef ADDRESS_CHECK
 bool bloomFilterAutoJoin = true;
+#else
+bool bloomFilterAutoJoin = false;
+#endif
 
 /************************ Function Definitions **********************************/
 
@@ -282,6 +286,15 @@ static void commandConfcb(uint8_t handle, miwi_status_t status, uint8_t* msgPoin
      (void)handle;
      (void)status;
      (void)msgPointer;
+        if (!bloomFilterAutoJoin)
+        {
+            APP_Msg_T    appMsg;
+            APP_Msg_T *appState;
+            appState = &appMsg;
+            appStates = APP_ADD_ACCEPTED_ADDRESS;
+            appState->msgId = (uint8_t)APP_ADD_ACCEPTED_ADDRESS;
+            OSAL_QUEUE_Send(&appData.appQueue, appState, 0);  
+        }
 }
 
 /************************************************************************************

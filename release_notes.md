@@ -14,6 +14,10 @@ With MiWi, application developers can switch between RF transceivers and wireles
 The three layers are linked together by MiMAC and MiApp interfaces. The Application layer uses MiApp interfaces to communicate to the protocol layer. In the protocol layer, there are implementations of MiWi Mesh, MiWi P2P, MiWi Star wireless communication protocols. 
 The drivers for WBZ451 and other Standalone Microchip RF transceivers (AT86RF233, AT86RF212B, AT86RF215) are called by protocol layers via MiMAC interfaces.
 
+## New Features
+
+-   Introduced Address Filtering fearute during network formation, activated by enabling the macro ADDRESS_CHECK.
+
 ## Known Issues / Limitations
 
 -	OTAU is not supported.

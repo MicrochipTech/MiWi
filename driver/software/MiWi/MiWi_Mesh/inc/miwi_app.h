@@ -76,11 +76,13 @@ typedef enum AppState_t {
 	APP_STATE_SLEEP,
     APP_STATE_FREQUENCY_AGILITY,
     APP_STATE_NOISE_DETECTION,
+    APP_ADD_ACCEPTED_ADDRESS
 } AppState_t;
 
 extern AppState_t appStates;
 extern uint8_t channelCount;
 extern uint8_t maxRSSI;
+extern uint8_t deviceCountRem;
 //extern bool deviceCanSleep;
 extern SYS_TIME_HANDLE testtimehandle;
 // *****************************************************************************

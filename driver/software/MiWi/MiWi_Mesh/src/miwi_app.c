@@ -75,6 +75,14 @@ static bool deviceCanSleep = false;
 static STACK_API_Request apiReq;
 uint8_t channelCount = 0U;
 uint8_t maxRSSI;
+uint8_t bloomFilterValue[BLOOM_FILTER_SIZE];
+uint8_t maxNumDevices = MAX_NUMBER_OF_DEVICES_IN_NETWORK;
+uint8_t acceptedDeviceCount = 0;
+// Increase the number of devices that can join the network by changing the parameter "numDevices".  Also add the device address, which can form a part of the network, in the array "acceptedDeviceAddress".
+//This Address filtering feature is activated only by enabling the macor "ADDRESS_CHECK"
+uint8_t const numDevices = 1;
+uint64_t acceptedDeviceAddress [1] = {0x22665544332211AB};//{0x33665544332211AB, 0x22665544332211AB,0x55665544332211AB,0x66665544332211AB,0x77665544332211AB,0x88665544332211AB, 0x99665544332211AB, 0x44665544332211AB, 0x11555544332211AB,0x22555544332211AB};
+uint8_t deviceCountRem = numDevices;
 static uint8_t gOptimalChannel = 0xFFU;
 static uint8_t minRSSI = 0xFFU;
 // *****************************************************************************
@@ -460,8 +468,34 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
         apiReq.paramSize = (uint8_t)sizeof(startNetworkReq_t);
         apiReq.uApiID = (uint8_t)MIWI_START_NW;
         MIWI_API_CALL((STACK_API_Request*)&apiReq);
+        APP_Msg_T    appMsg;
+        APP_Msg_T *appState;
+        appState = &appMsg;
+        appStates = APP_ADD_ACCEPTED_ADDRESS;
+        appState->msgId = (uint8_t)APP_ADD_ACCEPTED_ADDRESS;
+        OSAL_QUEUE_Send(&appData.appQueue, appState, 0);
 	break;
 	}
+
+    case APP_ADD_ACCEPTED_ADDRESS:
+    {
+        if (deviceCountRem !=0)
+        {
+            if (!bloomFilterAutoJoin)
+                {
+                    if (acceptedDeviceAddress[acceptedDeviceCount]!= 0)
+                        {
+                            bool addNewDevice = MiApp_Commissioning_AddNewDevice(acceptedDeviceAddress[acceptedDeviceCount], true);
+                            if (addNewDevice == true);
+                            {
+                                deviceCountRem--;
+                                acceptedDeviceCount++;
+                            }
+                        }
+                }
+        }  
+    break;
+    }
 
 #else
 	case (uint8_t)APP_STATE_CONNECT_NETWORK:
