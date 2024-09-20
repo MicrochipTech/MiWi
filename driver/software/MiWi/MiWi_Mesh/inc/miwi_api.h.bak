@@ -1219,7 +1219,7 @@ typedef struct  AppMessage_t {
 		uint8_t size;
 		char text[29];
 	}caption;
- DataConf_callback_t ConfCallback;
+        DataConf_callback_t ConfCallback;
 }__attribute__((packed, aligned(1)))AppMessage_t;
 
 

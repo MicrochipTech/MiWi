@@ -330,7 +330,6 @@ static void appDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* ms
 void appSendData(AppMessage_t *appMsg)
 {
     uint8_t myData = 0U;
-    AppMessage_t iappMsg;
     APP_Msg_T  appMode;
     APP_Msg_T *appState;
     appState = &appMode;
@@ -348,12 +347,6 @@ void appSendData(AppMessage_t *appMsg)
 #endif
 
 #if defined(PAN_COORDINATOR)
-    appMsg->caption.size         = (uint8_t)APP_CAPTION_SIZE;
-	memcpy(appMsg->caption.text, APP_CAPTION, APP_CAPTION_SIZE);
-    sprintf(&(appMsg->caption.text[APP_CAPTION_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", myShortAddress);
-#if defined(WSN_MONITOR_SUPPORT)     
-    appUartSendMessage((uint8_t *)appMsg, sizeof(AppMessage_t));
-#endif
     appDataSendingTimerHandle = SYS_TIME_CallbackRegisterMS(&appDataSendingTimerHandler, (uintptr_t)&myData,APP_SENDING_INTERVAL, SYS_TIME_SINGLE);
     if(appDataSendingTimerHandle == SYS_TIME_HANDLE_INVALID)
     {
@@ -363,7 +356,6 @@ void appSendData(AppMessage_t *appMsg)
 	appState->msgId = APP_STATE_WAIT_SEND_TIMER;
     OSAL_QUEUE_Send(&appData.appQueue, appState, 0U);
 #else
-    appMsg->caption.type         = 32;
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
@@ -395,25 +387,6 @@ void appSendData(AppMessage_t *appMsg)
 	}
 #endif
 }
-#if defined(PAN_COORDINATOR)
-SERCOM_USART_RING_BUFFER_CALLBACK usartCb(SERCOM_USART_EVENT event, uintptr_t cb)
-{        
-        ssize_t nUnreadBytes;
-        ssize_t nBytesRead;
-        SYS_CONSOLE_HANDLE myConsoleHandle;
-        myConsoleHandle = SYS_CONSOLE_HandleGet(SYS_CONSOLE_INDEX_0);
-        nUnreadBytes = SYS_CONSOLE_ReadCountGet(myConsoleHandle);
-        if (nUnreadBytes == -1)
-        {
-
-        }
-        else
-        {
-            SYS_CONSOLE_Read( myConsoleHandle, (void*)&rx_data, nUnreadBytes );
-        }
-        UartBytesReceived((uint16_t)nUnreadBytes,(uint8_t *)&rx_data);
-}
-#endif
 
 /*************************************************************************//**
 *****************************************************************************/
@@ -432,12 +405,7 @@ void MiApp_Init(void)
 #if defined(CHIMERA_SOC)
     EIC_CallbackRegister(EIC_PIN_0, eic_custom_cb, dummyVal);
 #else
-    EIC_CallbackRegister(EIC_PIN_8, eic_custom_cb, dummyVal);
-#endif
-#if defined(PAN_COORDINATOR)
-    SERCOM0_USART_ReadNotificationEnable(true, true);
-    SERCOM0_USART_ReadThresholdSet(19);
-    SERCOM0_USART_ReadCallbackRegister(usartCb, (uintptr_t)&dummyVal);
+    EIC_CallbackRegister(EIC_PIN_2, eic_custom_cb, dummyVal);
 #endif
 #endif
 }
@@ -560,17 +528,15 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
         apiReq.paramSize = (uint8_t)sizeof(startNetworkReq_t);
         apiReq.uApiID = (uint8_t)MIWI_START_NW;
         MIWI_API_CALL((STACK_API_Request*)&apiReq);
-#if defined(ADDRESS_CHECK)
         APP_Msg_T    appMsg;
         APP_Msg_T *appState;
         appState = &appMsg;
         appStates = APP_ADD_ACCEPTED_ADDRESS;
         appState->msgId = (uint8_t)APP_ADD_ACCEPTED_ADDRESS;
         OSAL_QUEUE_Send(&appData.appQueue, appState, 0);
-#endif
 	break;
 	}
-#if defined(ADDRESS_CHECK)
+
     case APP_ADD_ACCEPTED_ADDRESS:
     {
         if (deviceCountRem !=0)
@@ -590,7 +556,7 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
         }  
     break;
     }
-#endif
+
 #else
 	case (uint8_t)APP_STATE_CONNECT_NETWORK:
 	{
@@ -606,7 +572,7 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
 	}
 
 #endif
-#if defined(PAN_COORDINATOR) || defined(COORDINATOR) || defined (ENDDEVICE)
+#if defined(COORDINATOR) || defined (ENDDEVICE)
 	case (uint8_t)APP_STATE_SEND:
 	{
         AppMessage_t *p_appMsg = NULL;
@@ -619,23 +585,22 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
 	    MiApp_Get(CHANNEL, (uint8_t *)&appMsg.workingChannel);
 	    MiApp_Get(PANID, (uint8_t *)&appMsg.panId);
         p_appMsg = &appMsg;
+        appMsg.caption.type         = 32;
         #if defined(COORDINATOR)
 	    if (appMsg.shortAddr & RXON_ENDEVICE_ADDRESS_MASK)
 	    {
 		appMsg.caption.size         = APP_CAPTION_ED_SIZE;
-	    memcpy(appMsg.caption.text, APP_CAPTION_ED, APP_CAPTION_ED_SIZE);
-		sprintf(&(appMsg.caption.text[APP_CAPTION_ED_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", appMsg.shortAddr);
+//	    memcpy(appMsg.caption.text, APP_CAPTION_ED, APP_CAPTION_ED_SIZE);
+//		sprintf(&(appMsg.caption.text[APP_CAPTION_ED_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", shortAddressLocal);
 	   }
 	   else
        #endif
 	   {
 	    appMsg.caption.size         = (uint8_t)APP_CAPTION_SIZE;
-	    memcpy(appMsg.caption.text, APP_CAPTION, APP_CAPTION_SIZE);
-		sprintf(&(appMsg.caption.text[APP_CAPTION_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", appMsg.shortAddr);
+//	    memcpy(appMsg.caption.text, APP_CAPTION, APP_CAPTION_SIZE);
+//		sprintf(&(appMsg.caption.text[APP_CAPTION_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", shortAddressLocal);
 	    }
-#ifndef PAN_COORDINATOR
         appMsg.ConfCallback = appDataConf;
-#endif
         apiReq.parameters = p_appMsg;
         apiReq.paramSize = (uint8_t)sizeof(appMsg);
         apiReq.uApiID = (uint8_t)MIWI_SEND_DATA;

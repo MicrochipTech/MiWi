@@ -304,21 +304,19 @@ void appCmdDataRequest(uint16_t addr, uint8_t size, uint8_t* payload)
 *****************************************************************************/
 static void appCmdDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* msgPointer)
 {
-#if !defined(WSN_MONITOR_SUPPORT)
     APP_Msg_T *p_appModes;
     APP_Msg_T appModes;
     p_appModes = &appModes;
     appStates = APP_STATE_SENDING_DONE;
     p_appModes->msgId = APP_STATE_SENDING_DONE;
     OSAL_QUEUE_Send(&appData.appQueue, p_appModes, 0);
-#endif
 }
 
 /*************************************************************************//**
 *****************************************************************************/
 void appCmdDataInd(RECEIVED_MESH_MESSAGE *ind)
 {
-	appCmdHandle(ind->payload, ind->payloadSize);
+	//appCmdHandle(ind->payload, ind->payloadSize);
 }
 
 /*************************************************************************//**
