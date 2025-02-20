@@ -1217,9 +1217,9 @@ typedef struct  AppMessage_t {
 	struct {
 		uint8_t type;
 		uint8_t size;
-		char text[29];
+		char text[APP_CAPTION_SIZE];
 	}caption;
- DataConf_callback_t ConfCallback;
+        DataConf_callback_t ConfCallback;
 }__attribute__((packed, aligned(1)))AppMessage_t;
 
 

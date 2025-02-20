@@ -93,12 +93,12 @@ void MiMAC_Tasks(void)
         }
         case MIWI_SEND_DATA:
         {
-//#ifndef PAN_COORDINATOR
+#ifndef PAN_COORDINATOR
             AppMessage_t *pAppMsg = NULL;
             pAppMsg = (AppMessage_t*)(pApiReqQueueData->parameters);
             appSendData(pAppMsg); 
             pAppMsg = NULL;
-//#endif
+#endif
             break;
         }
         

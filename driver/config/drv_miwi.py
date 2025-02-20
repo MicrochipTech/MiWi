@@ -136,7 +136,7 @@ def instantiateComponent(miwicomp):
     preprocessorCompilerP2PStar = miwicomp.createSettingSymbol("MIWIP2PSTAR_XC32_PREPROCESSOR", None)
     preprocessorCompilerP2PStar.setCategory("C32")
     preprocessorCompilerP2PStar.setKey("preprocessor-macros")
-    # preprocessorCompilerP2PStar.setValue("ENABLE_QUEUE_CAPACITY;ENABLE_LARGE_BUFFER;CHIMERA_SOC;PROTOCOL_STAR;ENABLE_NETWORK_FREEZER;")
+    # preprocessorCompilerP2PStar.setValue("ENABLE_QUEUE_CAPACITY;ENABLE_LARGE_BUFFER;PIC32CXBZ_SOC;PROTOCOL_STAR;ENABLE_NETWORK_FREEZER;")
 
 
     global checkProtocolTypeMesh
@@ -813,7 +813,7 @@ def instantiateComponent(miwicomp):
     preprocessorCompiler = miwicomp.createSettingSymbol("MIWI_XC32_PREPROCESSOR", None)
     preprocessorCompiler.setCategory("C32")
     preprocessorCompiler.setKey("preprocessor-macros")
-    preprocessorCompiler.setValue("ENABLE_QUEUE_CAPACITY;ENABLE_LARGE_BUFFER;CHIMERA_SOC;ENABLE_NETWORK_FREEZER;WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H;PROTOCOL_MESH;PAN_COORDINATOR;")
+    preprocessorCompiler.setValue("ENABLE_QUEUE_CAPACITY;ENABLE_LARGE_BUFFER;PIC32CXBZ_SOC;ENABLE_NETWORK_FREEZER;WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H;PROTOCOL_MESH;PAN_COORDINATOR;")
 
     # === File templates processing
     global mimacMeshConfHeader

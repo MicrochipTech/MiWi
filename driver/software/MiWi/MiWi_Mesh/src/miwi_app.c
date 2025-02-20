@@ -67,9 +67,6 @@ static SYS_Timer_t appNetworkStatusTimer;
 static SYS_TIME_HANDLE appNetworkStatusTimerHandle;
 static bool appNetworkStatus;
 #endif
-#if defined(PAN_COORDINATOR)
-static uint8_t rx_data[APP_RX_BUF_SIZE];
-#endif
 AppMessage_t appMsg;
 #ifndef PAN_COORDINATOR
 static uint8_t wsnmsghandle;
@@ -107,55 +104,6 @@ static void appDataInd(RECEIVED_MESH_MESSAGE *ind);
 
 /*****************************************************************************
 *****************************************************************************/
-static void appUartSendMessage(uint8_t *data, uint8_t size)
-{
-	uint8_t cs = 0;
-    uint8_t val = 0;
-    ssize_t nr;
-    SYS_CONSOLE_HANDLE myConsoleHandle;
-    myConsoleHandle = SYS_CONSOLE_HandleGet(SYS_CONSOLE_INDEX_0);
-    val = 0x10;
-    SYS_CONSOLE_Write( myConsoleHandle, &val, 1);
-//    SERCOM0_USART_Write(&val,1);
-    val = 0x02;
-    SYS_CONSOLE_Write( myConsoleHandle, &val, 1);
-//    SERCOM0_USART_Write(&val,1);
-//         SERCOM0_USART_Write(0x02,1);
-	//sio2host_putchar(0x10);
-	//sio2host_putchar(0x02);
-
-	for (uint8_t i = 0; i < size; i++) {
-		if (data[i] == 0x10) 
-        {
-            val = 0x10;
-            SYS_CONSOLE_Write( myConsoleHandle, &val, 1);
-//            SERCOM0_USART_Write(&val,1);
-			//sio2host_putchar(0x10);
-			cs += 0x10;
-		}
-                  //SERCOM0_USART_Write((uint8_t *)&0x10,1);
-        val = data[i];
-        SYS_CONSOLE_Write( myConsoleHandle, &val, 1);
-//        SERCOM0_USART_Write(&val,1);
-		//sio2host_putchar(data[i]);
-		cs += data[i];
-	}
-         
-        val = 0x10;
-        SYS_CONSOLE_Write( myConsoleHandle, &val, 1);
-//        SERCOM0_USART_Write(&val,1);
-        val = 0x03;
-        SYS_CONSOLE_Write( myConsoleHandle, &val, 1);
-//        SERCOM0_USART_Write(&val,1);
-	//sio2host_putchar(0x10);
-	//sio2host_putchar(0x03);
-	    cs += 0x10 + 0x02 + 0x10 + 0x03;
-         SYS_CONSOLE_Write( myConsoleHandle, &cs, 1);
-//         SERCOM0_USART_Write((uint8_t *)&cs,1);
-         //SERCOM0_USART_Write(cs);
-	//sio2host_putchar(cs);
-}
-
 static void appDataInd(RECEIVED_MESH_MESSAGE *ind)
 {
     AppMessage_t *msg = (AppMessage_t *)ind->payload;
@@ -163,7 +111,7 @@ static void appDataInd(RECEIVED_MESH_MESSAGE *ind)
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
 #else
     LED_Toggle(1,LED_DATA);
@@ -171,10 +119,9 @@ static void appDataInd(RECEIVED_MESH_MESSAGE *ind)
 #endif
 #endif
 #endif
-
-	msg->lqi = ind->packetLQI;
-	msg->rssi = (int8_t)ind->packetRSSI;
-#if !defined(WSN_MONITOR_SUPPORT)
+ 
+    msg->lqi = ind->packetLQI;
+    msg->rssi = (int8_t)ind->packetRSSI;
     SYS_CONSOLE_PRINT("\r\nPayload received\r\n");
 #if defined(PAN_COORDINATOR)
     for(uint8_t i=0U; i<ind->payloadSize; i++)
@@ -190,12 +137,6 @@ static void appDataInd(RECEIVED_MESH_MESSAGE *ind)
     }
     SYS_CONSOLE_PRINT("\n");
 #endif
-#else
-#if defined(PAN_COORDINATOR)
-	appUartSendMessage(ind->payload, ind->payloadSize);
-#else
-    appCmdDataInd(ind);
-#endif
 #if defined(ENABLE_SLEEP_FEATURE) && defined(ENDDEVICE)
 #if (CAPABILITY_INFO == CAPABILITY_INFO_ED)
     deviceCanSleep = true;
@@ -203,7 +144,6 @@ static void appDataInd(RECEIVED_MESH_MESSAGE *ind)
     sleepReq.msgId = (uint8_t)APP_STATE_DATA_RECEIVE_IND;  
     appStates = APP_STATE_DATA_RECEIVE_IND;
     OSAL_QUEUE_Send(&appData.appQueue, &sleepReq, 0);
-#endif
 #endif
 #endif
 }
@@ -244,7 +184,7 @@ static void appNetworkStatusTimerHandler(uintptr_t context)
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
 #else
 	LED_Toggle(1,LED_NETWORK);
@@ -267,7 +207,7 @@ static void appDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* ms
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Off();
 #else
 	LED_Off(1,LED_DATA);
@@ -281,7 +221,7 @@ static void appDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* ms
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_On();
 #else
 	LED_On(1, LED_NETWORK);
@@ -298,7 +238,7 @@ static void appDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* ms
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Off();
 #else
 	LED_Off(1,LED_NETWORK);
@@ -330,7 +270,6 @@ static void appDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* ms
 void appSendData(AppMessage_t *appMsg)
 {
     uint8_t myData = 0U;
-    AppMessage_t iappMsg;
     APP_Msg_T  appMode;
     APP_Msg_T *appState;
     appState = &appMode;
@@ -348,12 +287,6 @@ void appSendData(AppMessage_t *appMsg)
 #endif
 
 #if defined(PAN_COORDINATOR)
-    appMsg->caption.size         = (uint8_t)APP_CAPTION_SIZE;
-	memcpy(appMsg->caption.text, APP_CAPTION, APP_CAPTION_SIZE);
-    sprintf(&(appMsg->caption.text[APP_CAPTION_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", myShortAddress);
-#if defined(WSN_MONITOR_SUPPORT)     
-    appUartSendMessage((uint8_t *)appMsg, sizeof(AppMessage_t));
-#endif
     appDataSendingTimerHandle = SYS_TIME_CallbackRegisterMS(&appDataSendingTimerHandler, (uintptr_t)&myData,APP_SENDING_INTERVAL, SYS_TIME_SINGLE);
     if(appDataSendingTimerHandle == SYS_TIME_HANDLE_INVALID)
     {
@@ -363,11 +296,10 @@ void appSendData(AppMessage_t *appMsg)
 	appState->msgId = APP_STATE_WAIT_SEND_TIMER;
     OSAL_QUEUE_Send(&appData.appQueue, appState, 0U);
 #else
-    appMsg->caption.type         = 32;
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_On();
 #else
 	LED_On(1, LED_DATA);
@@ -395,25 +327,6 @@ void appSendData(AppMessage_t *appMsg)
 	}
 #endif
 }
-#if defined(PAN_COORDINATOR)
-SERCOM_USART_RING_BUFFER_CALLBACK usartCb(SERCOM_USART_EVENT event, uintptr_t cb)
-{        
-        ssize_t nUnreadBytes;
-        ssize_t nBytesRead;
-        SYS_CONSOLE_HANDLE myConsoleHandle;
-        myConsoleHandle = SYS_CONSOLE_HandleGet(SYS_CONSOLE_INDEX_0);
-        nUnreadBytes = SYS_CONSOLE_ReadCountGet(myConsoleHandle);
-        if (nUnreadBytes == -1)
-        {
-
-        }
-        else
-        {
-            SYS_CONSOLE_Read( myConsoleHandle, (void*)&rx_data, nUnreadBytes );
-        }
-        UartBytesReceived((uint16_t)nUnreadBytes,(uint8_t *)&rx_data);
-}
-#endif
 
 /*************************************************************************//**
 *****************************************************************************/
@@ -429,15 +342,12 @@ void MiApp_Init(void)
     Rx_On(false);
     appInitialized = true;
 #ifdef USER_BUTTON_ENABLED
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
+#if defined (PLIB_EIC_H)
     EIC_CallbackRegister(EIC_PIN_0, eic_custom_cb, dummyVal);
-#else
-    EIC_CallbackRegister(EIC_PIN_8, eic_custom_cb, dummyVal);
 #endif
-#if defined(PAN_COORDINATOR)
-    SERCOM0_USART_ReadNotificationEnable(true, true);
-    SERCOM0_USART_ReadThresholdSet(19);
-    SERCOM0_USART_ReadCallbackRegister(usartCb, (uintptr_t)&dummyVal);
+#else
+    EIC_CallbackRegister(EIC_PIN_2, eic_custom_cb, dummyVal);
 #endif
 #endif
 }
@@ -560,17 +470,15 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
         apiReq.paramSize = (uint8_t)sizeof(startNetworkReq_t);
         apiReq.uApiID = (uint8_t)MIWI_START_NW;
         MIWI_API_CALL((STACK_API_Request*)&apiReq);
-#if defined(ADDRESS_CHECK)
         APP_Msg_T    appMsg;
         APP_Msg_T *appState;
         appState = &appMsg;
         appStates = APP_ADD_ACCEPTED_ADDRESS;
         appState->msgId = (uint8_t)APP_ADD_ACCEPTED_ADDRESS;
         OSAL_QUEUE_Send(&appData.appQueue, appState, 0);
-#endif
 	break;
 	}
-#if defined(ADDRESS_CHECK)
+
     case APP_ADD_ACCEPTED_ADDRESS:
     {
         if (deviceCountRem !=0)
@@ -580,7 +488,7 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
                     if (acceptedDeviceAddress[acceptedDeviceCount]!= 0)
                         {
                             bool addNewDevice = MiApp_Commissioning_AddNewDevice(acceptedDeviceAddress[acceptedDeviceCount], true);
-                            if (addNewDevice == true);
+                            if (addNewDevice == true)
                             {
                                 deviceCountRem--;
                                 acceptedDeviceCount++;
@@ -590,7 +498,7 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
         }  
     break;
     }
-#endif
+
 #else
 	case (uint8_t)APP_STATE_CONNECT_NETWORK:
 	{
@@ -606,7 +514,7 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
 	}
 
 #endif
-#if defined(PAN_COORDINATOR) || defined(COORDINATOR) || defined (ENDDEVICE)
+#if defined(COORDINATOR) || defined (ENDDEVICE)
 	case (uint8_t)APP_STATE_SEND:
 	{
         AppMessage_t *p_appMsg = NULL;
@@ -619,23 +527,22 @@ void MiAPP_TaskHandler(APP_Msg_T *appState)
 	    MiApp_Get(CHANNEL, (uint8_t *)&appMsg.workingChannel);
 	    MiApp_Get(PANID, (uint8_t *)&appMsg.panId);
         p_appMsg = &appMsg;
+        appMsg.caption.type         = 32;
         #if defined(COORDINATOR)
 	    if (appMsg.shortAddr & RXON_ENDEVICE_ADDRESS_MASK)
 	    {
 		appMsg.caption.size         = APP_CAPTION_ED_SIZE;
-	    memcpy(appMsg.caption.text, APP_CAPTION_ED, APP_CAPTION_ED_SIZE);
-		sprintf(&(appMsg.caption.text[APP_CAPTION_ED_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", appMsg.shortAddr);
+//	    memcpy(appMsg.caption.text, APP_CAPTION_ED, APP_CAPTION_ED_SIZE);
+//		sprintf(&(appMsg.caption.text[APP_CAPTION_ED_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", shortAddressLocal);
 	   }
 	   else
        #endif
 	   {
 	    appMsg.caption.size         = (uint8_t)APP_CAPTION_SIZE;
-	    memcpy(appMsg.caption.text, APP_CAPTION, APP_CAPTION_SIZE);
-		sprintf(&(appMsg.caption.text[APP_CAPTION_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", appMsg.shortAddr);
+//	    memcpy(appMsg.caption.text, APP_CAPTION, APP_CAPTION_SIZE);
+//		sprintf(&(appMsg.caption.text[APP_CAPTION_SIZE - SHORT_ADDRESS_CAPTION_SIZE]), "-0x%04X", shortAddressLocal);
 	    }
-#ifndef PAN_COORDINATOR
         appMsg.ConfCallback = appDataConf;
-#endif
         apiReq.parameters = p_appMsg;
         apiReq.paramSize = (uint8_t)sizeof(appMsg);
         apiReq.uApiID = (uint8_t)MIWI_SEND_DATA;
@@ -1050,7 +957,7 @@ void MiAppTimer_Init(void)
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_On();
 #else
 	LED_On(1, LED_NETWORK);
@@ -1217,7 +1124,7 @@ miwi_status_t PhyToMiwi_Status(PHY_Retval_t status)
             dataStat = CHANNEL_ACCESS_FAILURE;
             break;
         }
-#ifdef CHIMERA_SOC
+#ifdef PIC32CXBZ_SOC
         case PHY_RF_REQ_ABORTED:
         case PHY_RF_UNAVAILABLE:
         {
@@ -1331,7 +1238,7 @@ void MiMAC_RFDDemoInit(void)
 
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
     RGB_LED_BLUE_Off();
     RGB_LED_RED_Off();

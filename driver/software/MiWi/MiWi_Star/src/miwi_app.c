@@ -99,7 +99,7 @@ static void MiWi_WakeUpFromDeepSleep(void);
 // on, the operating channel will be one of the channels available with
 // least amount of energy (or noise).
 /*************************************************************************/
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
 uint8_t myChannel = 25U;
 /* Range: 11 to 26 */
 #elif defined(PHY_AT86RF212B)
@@ -220,7 +220,7 @@ static void Connection_Confirm(miwi_status_t status)
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_On();
 #else
 	LED_On(1,LED_NETWORK);
@@ -366,7 +366,7 @@ miwi_status_t PhyToMiwi_Status(PHY_Retval_t status)
             dataStat = CHANNEL_ACCESS_FAILURE;
             break;
         }
-#ifdef CHIMERA_SOC
+#ifdef PIC32CXBZ_SOC
         case PHY_RF_REQ_ABORTED:
         case PHY_RF_UNAVAILABLE:
         {
@@ -700,7 +700,7 @@ void MiMAC_RFDDemoInit(void)
     {
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
     RGB_LED_BLUE_Off();
     RGB_LED_RED_Off();

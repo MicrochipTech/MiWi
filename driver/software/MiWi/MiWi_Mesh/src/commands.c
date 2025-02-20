@@ -66,24 +66,24 @@ typedef enum {
 typedef struct {
 	uint8_t commandId;
 	uint64_t dstAddr;
-} __attribute__((packed, aligned(1)))AppCmdUartHeader_t;
+} AppCmdUartHeader_t;
 
 typedef struct {
 	uint8_t commandId;
 	uint64_t dstAddr;
 	uint16_t duration;
 	uint16_t period;
-} __attribute__((packed, aligned(1)))AppCmdUartIdentify_t;
+} AppCmdUartIdentify_t;
 
 typedef struct {
 	uint8_t id;
-} __attribute__((packed, aligned(1)))AppCmdHeader_t;
+} AppCmdHeader_t;
 
 typedef struct {
 	uint8_t id;
 	uint16_t duration;
 	uint16_t period;
-} __attribute__((packed, aligned(1)))AppCmdIdentify_t;
+} AppCmdIdentify_t;
 
 /*- Prototypes -------------------------------------------------------------*/
 //Commands definitions
@@ -161,18 +161,11 @@ void MiWiCmdTable_Init(void)
 *****************************************************************************/
 void APP_CommandsInit(void)
 {
-	appCmdIdentifyDurationTimer.mode = SYS_TIME_SINGLE;
-	appCmdIdentifyDurationTimer.handler = appCmdIdentifyDurationTimerHandler;
-
-	appCmdIdentifyPeriodTimer.mode = SYS_TIME_PERIODIC;
-	appCmdIdentifyPeriodTimer.handler = appCmdIdentifyPeriodTimerHandler;
-}
-
-void UartBytesReceived(uint16_t bytes, uint8_t *byte )
-{
-	for (uint16_t i = 0; i < bytes; i++) {
-		APP_CommandsByteReceived(byte[i]);
-	}
+//	appCmdIdentifyDurationTimer.mode = SYS_TIMER_INTERVAL_MODE;
+//	appCmdIdentifyDurationTimer.handler = appCmdIdentifyDurationTimerHandler;
+//
+//	appCmdIdentifyPeriodTimer.mode = SYS_TIMER_PERIODIC_MODE;
+//	appCmdIdentifyPeriodTimer.handler = appCmdIdentifyPeriodTimerHandler;
 }
 
 /*************************************************************************//**
@@ -304,21 +297,19 @@ void appCmdDataRequest(uint16_t addr, uint8_t size, uint8_t* payload)
 *****************************************************************************/
 static void appCmdDataConf(uint8_t msgConfHandle, miwi_status_t status, uint8_t* msgPointer)
 {
-#if !defined(WSN_MONITOR_SUPPORT)
     APP_Msg_T *p_appModes;
     APP_Msg_T appModes;
     p_appModes = &appModes;
     appStates = APP_STATE_SENDING_DONE;
     p_appModes->msgId = APP_STATE_SENDING_DONE;
     OSAL_QUEUE_Send(&appData.appQueue, p_appModes, 0);
-#endif
 }
 
 /*************************************************************************//**
 *****************************************************************************/
 void appCmdDataInd(RECEIVED_MESH_MESSAGE *ind)
 {
-	appCmdHandle(ind->payload, ind->payloadSize);
+	//appCmdHandle(ind->payload, ind->payloadSize);
 }
 
 /*************************************************************************//**
@@ -362,7 +353,7 @@ static bool appCmdHandle(uint8_t *data, uint8_t size)
         }
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_On();
 #else
 	LED_On(1,LED_IDENTIFY);
@@ -381,7 +372,7 @@ static void appCmdIdentifyDurationTimerHandler(uintptr_t context)
 {
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Off();
 #else
 	LED_Off(1,LED_IDENTIFY);
@@ -404,7 +395,7 @@ static void appCmdIdentifyPeriodTimerHandler(uintptr_t context)
 {
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
 #else
 	LED_Toggle(1,LED_IDENTIFY);
@@ -954,7 +945,7 @@ void appPhyCmdProcessor_PhyStatusPrint(PHY_Retval_t status){
         case 0x82:
             SYS_CONSOLE_PRINT("\r\nPHY_TRX_AWAKE\r\n");
             break;
-#ifdef CHIMERA_SOC
+#ifdef PIC32CXBZ_SOC
         case 0x83:
             SYS_CONSOLE_PRINT("\r\nPHY_RF_REQ_ABORTED\r\n");
             break;

@@ -1003,7 +1003,9 @@ bool sendDataFrame(NwkFrame_t *nwkFrame, uint16_t nextHopAddr, DataConf_callback
                     meshHeader.frameControl.dataPending = 1;
                 }
             }
-            indirectdataFramePtr = (NwkFrame_t *)indirectdataFramePtr->nextFrame;
+            // indirectdataFramePtr = (NwkFrame_t *)indirectdataFramePtr->nextFrame;
+			indirectdataFramePtr = (NwkFrame_t *)buffer_header->next->body;
+            buffer_header = buffer_header->next;
         }
     }
     }

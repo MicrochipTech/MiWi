@@ -1073,7 +1073,7 @@ void handleJoinMessage(MeshFrameHeader_t *meshHeader, uint8_t macSrcAddrLen,
             {
                 for (shortAddressIndex = 0U; shortAddressIndex < miwiDefaultRomOrRamParams->numOfRxOnEnddevices; shortAddressIndex++)
                 {
-                    if (shortAddressIndex == (meshHeader->srcAddr & RXON_ENDEVICE_ADDRESS_MASK))
+                    if (shortAddressIndex == (meshHeader->srcAddr - RXON_ENDEVICE_ADDRESS_MASK))
                     {
                         if (memcmp(miwiDefaultRomOrRamParams->devTable[shortAddressIndex].ieeeaddr, &payload[1], LONG_ADDR_LEN) == 0)
                         {

@@ -3,6 +3,25 @@
 
 # Microchip Wireless (MiWi) Release Notes
 
+## Release V1.2.0
+
+## New Features / Improvements
+
+- Fixed Stability issue due to improper accessing of indirectdataFramePtr while sending indirect data.
+
+- Fixed issue related to Keep alive timer not re-starting for RX_ON_ED
+
+## Known Issues / Limitations
+
+-	OTAU is not supported.
+-   MiWi depends on the Standalone PHY layer for lower functionality and any not supported feature/issues persist on that component will have an impact of the MiWi stack functionality.
+
+## Development Tools
+-	MPLAB X v6.20
+-	MPLAB® XC32 C/C++ Compiler v4.45
+-	MPLAB® X IDE plug-ins: MPLAB® Code Configurator (MCC) v5.5.1 and above
+
+
 ## Release v1.1.0
 
 MiWi is a Microchip proprietary protocol developed to support a wide range of wireless applications. 
