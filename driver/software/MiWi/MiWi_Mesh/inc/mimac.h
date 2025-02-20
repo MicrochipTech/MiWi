@@ -37,7 +37,7 @@
 
 #include "config/default/definitions.h"
     
-#if (defined(CHIMERA_SOC))
+#if (defined(PIC32CXBZ_SOC))
 	#define FULL_CHANNEL_MAP       0x07FFF800
 	#define FIRST_CHANNEL_NUM      11
 	#define LAST_CHANNEL_NUM       26
@@ -66,7 +66,7 @@
 	#define SYMBOLS_TO_TICKS(a)     ((a)*(16*ONE_MICRO_SECOND))
 	#define TICKS_TO_SYMBOLS(a)     ((a)/(16*ONE_MICRO_SECOND))
 
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
 	#define SYMBOLS_TO_TICKS(a)     ((a)*(16*ONE_MICRO_SECOND))
 	#define TICKS_TO_SYMBOLS(a)     ((a)/(16*ONE_MICRO_SECOND))
 #elif defined(PHY_AT86RF233)

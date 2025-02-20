@@ -656,7 +656,7 @@ bool MiMAC_ReceivedPacket(void)
     PHY_FrameInfo_t *rxFramePtr = NULL;
     buffer_t *buffer_header = NULL;
     uint8_t PayloadLen = 0U;
-    buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+    buffer_header = qmm_queue_read(&frameRxQueue, NULL);
     if(buffer_header == NULL)
     {
         return false;
@@ -833,6 +833,12 @@ bool MiMAC_ReceivedPacket(void)
 			default:
             {
              	// not valid addressing mode or no addressing info discard packet
+                buffer_t *buffer_header = NULL;
+                buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+                if(buffer_header == NULL)
+                {
+                    return false;
+                }
                 bmm_buffer_free(buffer_header);
 			    return false;   
             }
@@ -841,8 +847,14 @@ bool MiMAC_ReceivedPacket(void)
 
 		if (rxFramePtr->mpdu[1] & 0x08U)
 		{
+            buffer_t *buffer_header = NULL;
+            buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+            if(buffer_header == NULL)
+            {
+                return false;
+            }
             bmm_buffer_free(buffer_header);
-			return false;
+			return false;   
 		}
 
 		// check the frame type. Only the data and command frame type
@@ -861,15 +873,23 @@ bool MiMAC_ReceivedPacket(void)
 			MACRxPacket.flags.bits.packetType = PACKET_TYPE_RESERVE;
 			break;
 			default: // not support frame type
+            {
+                buffer_t *buffer_header = NULL;
+                buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+                if(buffer_header == NULL)
+                {
+                    return false;
+                }
                 bmm_buffer_free(buffer_header);
-			    return false;
+                return false;   
                 break;
+            }
 		}
 		#ifndef TARGET_SMALL
 		MACRxPacket.LQIValue = rxFramePtr->mpdu[PayloadLen - 2U];
 		MACRxPacket.RSSIValue = rxFramePtr->mpdu[PayloadLen - 1U];
 		#endif
-        bmm_buffer_free(buffer_header);
+        // bmm_buffer_free(buffer_header);
 		return true;
 	}
 	return false;

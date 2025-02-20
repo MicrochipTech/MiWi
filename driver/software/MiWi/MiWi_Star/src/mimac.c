@@ -1059,7 +1059,7 @@ bool MiMAC_ReceivedPacket(void)
     PHY_FrameInfo_t *rxFramePtr = NULL;
     buffer_t *buffer_header = NULL;
     uint8_t PayloadLen = 0U;
-    buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+    buffer_header = qmm_queue_read(&frameRxQueue, NULL);
     if(buffer_header == NULL)
     {
         return false;
@@ -1237,8 +1237,15 @@ bool MiMAC_ReceivedPacket(void)
 			default:
             {
              	// not valid addressing mode or no addressing info discard packet
-                bmm_buffer_free(buffer_header);
-			    return false;   
+				buffer_t *buffer_header = NULL;
+				buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+				if(buffer_header == NULL)
+				{
+					 return false;
+				}
+				bmm_buffer_free(buffer_header);
+				return false;   
+			       
             }
             break;
 		}
@@ -1249,8 +1256,14 @@ bool MiMAC_ReceivedPacket(void)
 
 			if (addrMode < 0xC0U)
 			{
+                buffer_t *buffer_header = NULL;
+                buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+                if(buffer_header == NULL)
+                {
+                    return false;
+                }
                 bmm_buffer_free(buffer_header);
-				return false;
+			    return false;   
 			}
 
 			FrameCounter.v[0] = MACRxPacket.Payload[0];
@@ -1270,8 +1283,14 @@ bool MiMAC_ReceivedPacket(void)
             // drop the frame in case of replay
             if (i < CONNECTION_SIZE && IncomingFrameCounter[i].Val >= FrameCounter.Val)
             {
+                buffer_t *buffer_header = NULL;
+                buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+                if(buffer_header == NULL)
+                {
+                    return false;
+                }
                 bmm_buffer_free(buffer_header);
-                return false;
+			    return false;   
             }
 			
 			MACRxPacket.PayloadLen -= 5U;  // used to 5 for frame counter now -4 also added for MIC integrity
@@ -1284,8 +1303,14 @@ bool MiMAC_ReceivedPacket(void)
  					//MACRxPacket.PayloadLen -= 4;
 			if (false == DataDecrypt(&(MACRxPacket.Payload[5]), &(MACRxPacket.PayloadLen), MACRxPacket.SourceAddress, FrameCounter, rxFramePtr->mpdu[1]))
 			{
+                buffer_t *buffer_header = NULL;
+                buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+                if(buffer_header == NULL)
+                {
+                    return false;
+                }
                 bmm_buffer_free(buffer_header);
-				return false;
+			    return false;   
 			}
 			
 			// update the frame counter
@@ -1301,8 +1326,14 @@ bool MiMAC_ReceivedPacket(void)
 #else
 		if (rxFramePtr->mpdu[1] & 0x08U)
 		{
+            buffer_t *buffer_header = NULL;
+            buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+            if(buffer_header == NULL)
+            {
+                return false;
+            }
             bmm_buffer_free(buffer_header);
-			return false;
+			return false;   
 		}
 #endif
 
@@ -1322,15 +1353,23 @@ bool MiMAC_ReceivedPacket(void)
 			MACRxPacket.flags.bits.packetType = PACKET_TYPE_RESERVE;
 			break;
 			default: // not support frame type
-                bmm_buffer_free(buffer_header);
-			    return false;
+			{
+				buffer_t *buffer_header = NULL;
+				buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+				if(buffer_header == NULL)
+				{
+					return false;
+				}
+				bmm_buffer_free(buffer_header);
+				return false;   
                 break;
+			}
 		}
 		#ifndef TARGET_SMALL
 		MACRxPacket.LQIValue = rxFramePtr->mpdu[PayloadLen - 2U];
 		MACRxPacket.RSSIValue = rxFramePtr->mpdu[PayloadLen - 1U];
 		#endif
-        bmm_buffer_free(buffer_header);
+        // bmm_buffer_free(buffer_header);
 		return true;
 	}
 	return false;

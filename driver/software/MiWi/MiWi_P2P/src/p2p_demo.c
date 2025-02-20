@@ -288,7 +288,7 @@ void ReceivedDataIndication (RECEIVED_MESSAGE *ind)
 #if !defined(ENABLE_SLEEP_FEATURE)
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
 #else
 	LED_Toggle(1,LED_NETWORK);
@@ -330,7 +330,7 @@ void MiApp_Init(void)
     appInitialized = true;
 #ifdef USER_BUTTON_ENABLED
     dummyVal = 0U;
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     EIC_CallbackRegister(EIC_PIN_0, eic_custom_cb, dummyVal);
 #else
     EIC_CallbackRegister(EIC_PIN_2, eic_custom_cb, dummyVal);

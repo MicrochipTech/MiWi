@@ -2734,7 +2734,13 @@ void P2PStarTasks(void)
     if(MiMAC_ReceivedPacket())
     {
         frameParse(&MACRxPacket);
-        MiMAC_DiscardPacket();
+        buffer_t *buffer_header = NULL;
+        buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+        if(buffer_header != NULL)
+        {
+           bmm_buffer_free(buffer_header);
+        }
+        // MiMAC_DiscardPacket();
     }
    }
 #ifdef ENABLE_SLEEP_FEATURE

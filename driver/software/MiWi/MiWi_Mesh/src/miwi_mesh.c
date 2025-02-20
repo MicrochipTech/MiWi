@@ -485,6 +485,13 @@ void MeshTasks(void)
     if(MiMAC_ReceivedPacket())
 	{
 		frameParse(&MACRxPacket);
+		buffer_t *buffer_header = NULL;
+        buffer_header = qmm_queue_remove(&frameRxQueue, NULL);
+        if(buffer_header != NULL)
+        {
+           bmm_buffer_free(buffer_header);
+        }
+  
 	}
     }
 #ifdef ENDDEVICE

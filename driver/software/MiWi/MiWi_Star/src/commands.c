@@ -385,7 +385,7 @@ static void appCmdIdentifyPeriodTimerHandler(uintptr_t context)
 {
 #if defined(LED_ENABLED)
 #if (LED_COUNT > 0U)
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
     RGB_LED_GREEN_Toggle();
 #else
 	LED_Toggle(1,LED_IDENTIFY);
@@ -935,7 +935,7 @@ void appPhyCmdProcessor_PhyStatusPrint(PHY_Retval_t status){
         case 0x82:
             SYS_CONSOLE_PRINT("\r\nPHY_TRX_AWAKE\r\n");
             break;
-#ifdef CHIMERA_SOC
+#ifdef PIC32CXBZ_SOC
         case 0x83:
             SYS_CONSOLE_PRINT("\r\nPHY_RF_REQ_ABORTED\r\n");
             break;

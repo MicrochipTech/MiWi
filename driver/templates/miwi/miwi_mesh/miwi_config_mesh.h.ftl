@@ -41,7 +41,7 @@
 
     /* Channel Map for Network Operation - Configurable */
 <#if USE_CHANNEL == "YES">
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
 #define CHANNEL_MAP    (1L << ${CHANNEL})
 #elif defined(PHY_AT86RF212B)
 #define CHANNEL_MAP    (1L << 8)

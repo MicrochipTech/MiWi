@@ -294,7 +294,7 @@ void STAR_DEMO_OPTIONS_MESSAGE(bool NetworkRole)
 	        SYS_CONSOLE_PRINT("PC :SW FUNC \n   to Broadcast\r\n");
 	    #elif defined(PHY_AT86RF212B)
 	        SYS_CONSOLE_PRINT("PC :SW FUNC \n   to Broadcast\r\n");
-        #elif defined(CHIMERA_SOC)
+        #elif defined(PIC32CXBZ_SOC)
 	        SYS_CONSOLE_PRINT("PC :SW FUNC \n   to Broadcast\r\n");
 	    #endif
     }
@@ -304,7 +304,7 @@ void STAR_DEMO_OPTIONS_MESSAGE(bool NetworkRole)
 			SYS_CONSOLE_PRINT("SW FUNC : Unicast \nJOYSTICK: Next Node\r\n");
 	    #elif defined(PHY_AT86RF212B)
 	        SYS_CONSOLE_PRINT("SW FUNC : Unicast \nJOYSTICK: Next Node\r\n");
-        #elif defined(CHIMERA_SOC)
+        #elif defined(PIC32CXBZ_SOC)
 	    printf("SW FUNC : Unicast \nJOYSTICK: Next Node\r\n");
 	    #endif
     }

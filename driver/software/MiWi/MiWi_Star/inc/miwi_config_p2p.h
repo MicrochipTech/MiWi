@@ -42,7 +42,7 @@
 
 /* Channel Map for Network Operation - Configurable */
 
-#if defined(CHIMERA_SOC)
+#if defined(PIC32CXBZ_SOC)
 #define CHANNEL_MAP    (1L << 25)
 /* Range: 11 to 26 */
 #elif defined(PHY_AT86RF212B)

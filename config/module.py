@@ -24,24 +24,26 @@
 def loadModule():
     print('Load Module: Harmony Wireless MiWi (Applications and Protocol Libraries)')
 
-    pic32cx_bz2_family = {'PIC32CX1012BZ25048',
+    supportedDevices = {'PIC32CX1012BZ25048',
                           'PIC32CX1012BZ25032',
                           'PIC32CX1012BZ24032',
                           'WBZ451',
+                          'WBZ451H',
                           'WBZ450',
+                          'WBZ351',
                           'ATSAML21J18B',
                           'ATSAMR21G18A',
                           'ATSAMD20J18A',
                           'ATSAMD21J18A',
                           'ATSAMR30G18A',
-                          'WBZ351',
+                          'ATSAMR30E18A',
                           } 
                           
     processor = Variables.get('__PROCESSOR') 
     
     print('processor={}'.format(processor))
     
-    if (processor in pic32cx_bz2_family):  
+    if (processor in supportedDevices):  
         # MiWi Protocol Type
         miwicomp  = Module.CreateComponent('microchipwireless', 'MiWi', 'Wireless/Drivers/', 'driver/config/drv_miwi.py')
         miwicomp.setDisplayType('MiWi Protocol Stack')
